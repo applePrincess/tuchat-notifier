@@ -4,6 +4,8 @@ const messageBox = document.querySelector('#message');
 let browserRoot;
 if(chrome !== undefined) {
   browserRoot = chrome;
+} else if (browser !== undefined) {
+  browserRoot = browser;
 }
 document.querySelector('#submit').addEventListener('click', () => {
   const uid = document.querySelector('#uid').value;
@@ -14,11 +16,10 @@ document.querySelector('#submit').addEventListener('click', () => {
     messageBox.style.visibility = 'visible';
     return;
   }
-  console.log(uid, passwd);
   browserRoot.runtime.sendMessage({uid, passwd});
 });
 
-browserRoot.runtime.onMessage.addListener((request, sender, sendResponse) => {
+browserRoot.runtime.onMessage.addListener((request) => {
   if(request.status === -1) {
     messageBox.innerHTML = request.message;
     messageBox.style.visibility = 'visible';

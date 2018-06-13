@@ -2,7 +2,10 @@ let browserRoot = undefined; // for compatibility this is the root elemen.
 
 if (chrome !== undefined){
   browserRoot = chrome;
+} else if (browser !== undefined){
+  browserRoot = browser;
 }
+
 let receivedAny = false;
 const HomepageURL = 'tk2-217-18218.vs.sakura.ne.jp';
 const ChatPort = 8891;
