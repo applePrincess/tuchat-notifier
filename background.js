@@ -18,6 +18,11 @@ function notify(options, callback) {
 }
 
 browserRoot.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if(request.close !== undefined){
+    WS.close();
+    sendResponse({status:2, message:'Websocket is closed.'});
+    return;
+  }
   WS = new WebSocket(`ws://${HomepageURL}:${ChatPort}`);
   WS.addEventListener('open', (event) => {
     WS.send(`\t${request.uid}\t${request.passwd}`);
@@ -26,11 +31,11 @@ browserRoot.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if(event.data === 'ID又はPASSが違います')
     {
       WS.close();
-      sendResponse({status:-1, message: 'ID またはパスワードが違います。'});
+      sendResponse({status:-1, message: 'ID or Password is incorrect.'});
       return;
     }
     if(!receivedAny) {
-      sendResponse({status:0, message:'Websocketが開通しました。'});
+      sendResponse({status:0, message:'Websocket is OK.'});
       receivedAny = true;
     }
     queue.push(new Chat(event.data).toNotifiable(), (e) => {});
@@ -53,7 +58,7 @@ browserRoot.runtime.onMessage.addListener((request, sender, sendResponse) => {
   setInterval(() => {
     if(queue.length !== 0)
     {
-      notify({message:'新規メーセジがあります'}, id => {
+      notify({message:'You got new message.'}, id => {
         console.log(id);
       });
       queue.length = 0; // queue.clear;

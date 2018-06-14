@@ -4,10 +4,13 @@
   </head>
   <body>
     <h1>TUChat</h1>
+    <label for="uid">ID</label>
     <input type="text" id="uid" minlength="1"/>
+    <label for="passwd">Password</label>
     <input type="password" id="passwd" minlength="1"/>
     <div id="message" style="visibility:hidden"></div>
-    <button id="submit">ログイン</button>
+    <button id="submit">Log in</button>
+    <button style="visibility:hidden" id="submitO">Log out</button>
     <script src="popup.js" defer>
     </script>
   </body>

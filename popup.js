@@ -12,7 +12,7 @@ document.querySelector('#submit').addEventListener('click', () => {
   const passwd = document.querySelector('#passwd').value;
   if(uid === '' || passwd === '') {
     const messageBox = document.querySelector('#message');
-    messageBox.innerHTML = 'ID またはパスワードは最低一文字以上です。';
+    messageBox.innerHTML = 'ID and Password cannot be empty.';
     messageBox.style.visibility = 'visible';
     return;
   }
@@ -27,8 +27,18 @@ browserRoot.runtime.onMessage.addListener((request) => {
   if(request.status === 0) {
     messageBox.innerHTML = '';
     messageBox.style.visibility = 'hidden';
+    document.querySelector('#submitO').style.visibility = 'visible';
+    document.querySelector('#submit').style.visibility = 'hidden';
+    document.querySelector('#submitO').addEventListener('click', () => {
+      browserRoot.runtime.sendMessage({close:1});
+    });
   }
   if(request.status === 1) {
     window.open(request.destination, request.target);
+  }
+  if(request.status === 2) {
+    document.querySelector('#submit').style.visibility = 'visible';
+    document.querySelector('#submitO').style.visibility = 'hidden';
+
   }
 });

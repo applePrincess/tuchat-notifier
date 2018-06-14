@@ -1,9 +1,6 @@
 {
-  /*"applications": {
-    "gecko": {
-      "id": "tuchat-notifier@appleprincess.io"
-    }
-  },*/
+  
+ 
   "background": {
     "scripts": ["background.js"]
   },
