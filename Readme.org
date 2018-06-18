@@ -1,0 +1,5 @@
+#+TITLE: TUChat Notifier
+
+
+* License
+The copyrights of icon.png and its derivations icon48.png and icon128.png is owned by the original author T.Umezawa
