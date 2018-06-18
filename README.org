@@ -1,5 +1,0 @@
-#+TITLE: tuchat-notifier
-
-Browser Extension to notify a new conversation from TUGames
-
-icon.png およびそれのサイズ変更を施した icon48.png, icon128.pngの著作権は icon.pngの製作者の T.Umezawa にあります。
