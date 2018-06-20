@@ -81,8 +81,15 @@ browserRoot.runtime.onMessage.addListener((request, sender, sendResponse) => {
   // it can be as sensitive as one notification per one messsage, but, for here, once per 30s
   if (timerId === undefined) {
     timerId = setInterval(() => {
-      if(queue.length !== 0)
-      {
+      let atabs;
+      atabs = browserRoot.tabs.query({active: true}, (tabs) => atabs = tabs);
+      let urls = atabs.forEach(tab => tab
+                               .url
+                               .match(/(tugame\.appleprincess\.io|tk2-217\.18218\.vs\.sakura\.ne\.jp)(.*)/)[2]);
+      if(urls.includes('game.php')) {
+        queue.length = 0;
+      }
+      if(queue.length !== 0) {
         notify({message:'You got new message.'}, () => {
         // console.log(id)
         });
