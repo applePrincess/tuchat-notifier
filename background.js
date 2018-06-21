@@ -82,13 +82,8 @@ browserRoot.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (timerId === undefined) {
     timerId = setInterval(() => {
       let atabs;
-      atabs = browserRoot.tabs.query({active: true}, (tabs) => atabs = tabs);
-      let urls = atabs.forEach(tab => tab
-                               .url
-                               .match(/(tugame\.appleprincess\.io|tk2-217\.18218\.vs\.sakura\.ne\.jp)(.*)/)[2]);
-      if(urls.includes('game.php')) {
-        queue.length = 0;
-      }
+      atabs = browserRoot.tabs.query({active: true}, (tabs) => clearQueue(tabs));
+      clearQueue(atabs);
       if(queue.length !== 0) {
         notify({message:'You got new message.'}, () => {
         // console.log(id)
@@ -98,6 +93,21 @@ browserRoot.runtime.onMessage.addListener((request, sender, sendResponse) => {
     }, 30000);
   }
 });
+
+function clearQueue(tabs) {
+  if(tabs === undefined)
+    return;
+  let urls = tabs.map(tab => tab.url);
+  let matches = urls.map(url => url.match(/(tugame\.appleprincess\.io|tk2-217\.18218\.vs\.sakura\.ne\.jp)(.*)/));
+  if(matches[0] === null) {
+    return;
+  }
+  for(const match in matches) {
+    if(match.find(s => s.includes('game.php')) !== undefined) {
+      queue.length = 0;
+    }
+  }
+}
 
 class Chat
 {
