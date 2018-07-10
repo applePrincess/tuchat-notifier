@@ -2,4 +2,4 @@
 
 
 * License
-The copyrights of icon.png and its derivations icon48.png and icon128.png is owned by the original author T.Umezawa
+The copyrights of icon.png and its derivations icon48.png and icon128.png is obtained by the original author T.Umezawa
